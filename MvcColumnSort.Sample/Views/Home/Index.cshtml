@@ -1,0 +1,28 @@
+﻿@model IEnumerable<MvcColumnSort.Sample.Models.Employee>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Column Sort Sample</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>@Html.SortActionLink("First Name", "Index", "Home", "FirstName" )</th>
+            <th>@Html.SortActionLink("Last Name", "Index", "Home", "LastName" )</th>
+            <th>@Html.SortActionLink("Age", "Index", "Home", "Age" )</th>
+            <th>@Html.SortActionLink("Gender", "Index", "Home", "Gender" )</th>
+            <th>@Html.SortActionLink("Years Of Service", "Index", "Home", "YearsOfService" )</th>
+        </tr>
+    </thead>
+    @foreach (var employee in Model)
+    {
+        <tr>
+            <td>@employee.FirstName</td>
+            <td>@employee.LastName</td>
+            <td>@employee.Age</td>
+            <td>@employee.Gender</td>
+            <td>@employee.YearsOfService</td>
+        </tr>
+    }
+</table>
