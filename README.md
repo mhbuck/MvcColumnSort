@@ -2,6 +2,7 @@
 This is just a project that spawned from frustration working with sorting in MVC and building the sort links. I never seemed to get a clean implimentation so far this has been working well.
 
 ### TODO - Column Sort Extension
+* Route values passed in will only ever be used. Need to look at pulling from current query string instead.
 * There are a couple issues I am trying to work out around other query string items and how checkboxes are used. (This is in expanded scenarios with filters - More samples to follow)
 
 ### TODO - Sample Project
