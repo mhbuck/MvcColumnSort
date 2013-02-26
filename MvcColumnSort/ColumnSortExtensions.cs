@@ -92,24 +92,19 @@ namespace MvcColumnSort
 
             if (columnName == currentColumn)
             {
+                // Direction from the query string
                 string currentDirection = htmlHelper.ViewContext.HttpContext.Request.QueryString.Get(directionKey);
 
                 if (currentDirection != null)
                 {
                     if (Enum.TryParse<SortDirection>(currentDirection, out sortDirection))
                     {
-                        switch (sortDirection)
-                        {
-                            case SortDirection.Ascending:
-                                sortDirection = SortDirection.Descending;
-                                break;
-                            case SortDirection.Descending:
-                                sortDirection = SortDirection.Ascending;
-                                break;
-                        }
+                        // Invert the direction
+                        sortDirection = sortDirection == SortDirection.Ascending ? SortDirection.Descending : SortDirection.Ascending;
                     }
                 }
 
+                // Adding the default sort class. Should this be configurable?
                 string sortClass = string.Format("sort {0}", sortDirection.ToString().ToLower());
 
                 if (htmlAttributes == null)
@@ -127,6 +122,7 @@ namespace MvcColumnSort
                 }
             }
 
+            // Unless we take from current query string this will only ever use the route dictionary
             routeValues[columnKey] = columnName;
             routeValues[directionKey] = sortDirection;
 
