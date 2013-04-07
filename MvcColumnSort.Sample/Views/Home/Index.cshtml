@@ -1,28 +1,37 @@
-﻿@model IEnumerable<MvcColumnSort.Sample.Models.Employee>
+﻿@model MvcColumnSort.Sample.Models.IndexViewModel
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Column Sort Sample</h2>
 <a href="https://github.com/mhbuck/MvcColumnSort"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
-<table>
-    <thead>
-        <tr>
-            <th>@Html.SortActionLink("First Name", "Index", "Home", "FirstName" )</th>
-            <th>@Html.SortActionLink("Last Name", "Index", "Home", "LastName" )</th>
-            <th>@Html.SortActionLink("Age", "Index", "Home", "Age" )</th>
-            <th>@Html.SortActionLink("Gender", "Index", "Home", "Gender" )</th>
-            <th>@Html.SortActionLink("Years Of Service", "Index", "Home", "YearsOfService" )</th>
-        </tr>
-    </thead>
-    @foreach (var employee in Model)
-    {
-        <tr>
-            <td>@employee.FirstName</td>
-            <td>@employee.LastName</td>
-            <td>@employee.Age</td>
-            <td>@employee.Gender</td>
-            <td>@employee.YearsOfService</td>
-        </tr>
-    }
-</table>
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Get))
+{
+    <span>
+        @Html.LabelFor(m => m.FilterIsEnabled)
+        @Html.CheckBoxFor(m => m.FilterIsEnabled)
+        <input type="submit" value="Filter" />
+    </span>
+    <table>
+        <thead>
+            <tr>
+                <th>@Html.SortActionLink("First Name", "Index", "Home", "FirstName" )</th>
+                <th>@Html.SortActionLink("Last Name", "Index", "Home", "LastName" )</th>
+                <th>@Html.SortActionLink("Age", "Index", "Home", "Age" )</th>
+                <th>@Html.SortActionLink("Gender", "Index", "Home", "Gender" )</th>
+                <th>@Html.SortActionLink("Years Of Service", "Index", "Home", "YearsOfService" )</th>
+            </tr>
+        </thead>
+        @foreach (var employee in Model.Employees)
+        {
+            <tr>
+                <td>@employee.FirstName</td>
+                <td>@employee.LastName</td>
+                <td>@employee.Age</td>
+                <td>@employee.Gender</td>
+                <td>@employee.YearsOfService</td>
+            </tr>
+        }
+    </table>
+}

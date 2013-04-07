@@ -12,5 +12,6 @@ namespace MvcColumnSort.Sample.Models
         public int Age { get; set; }
         public string Gender { get; set; }
         public int YearsOfService { get; set; }
+        public bool IsActive { get; set; }
     }
 }

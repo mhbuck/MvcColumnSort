@@ -122,11 +122,27 @@ namespace MvcColumnSort
                 }
             }
 
+            // This will only take route values that are part of what has been passed. 
+            // This maybe quite limiting. The issue having is with checkboxes and how the ToRouteDictionary works on the query string
+            RouteValueDictionary sortingRouteValues = htmlHelper.ViewContext.HttpContext.Request.QueryString.ToRouteValueDictionary();
+
+            foreach (var keyValuePair in routeValues)
+            {
+                sortingRouteValues[keyValuePair.Key] = keyValuePair.Value;
+            }
+
+            sortingRouteValues[columnKey] = columnName;
+            sortingRouteValues[directionKey] = sortDirection;
+
+            return htmlHelper.ActionLink(linkText, actionName, controllerName, sortingRouteValues, htmlAttributes);
+
+            /*
             // Unless we take from current query string this will only ever use the route dictionary
             routeValues[columnKey] = columnName;
             routeValues[directionKey] = sortDirection;
 
             return htmlHelper.ActionLink(linkText, actionName, controllerName, routeValues, htmlAttributes);
+             */
         }
     }
 }

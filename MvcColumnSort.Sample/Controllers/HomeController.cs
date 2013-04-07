@@ -19,12 +19,16 @@ namespace MvcColumnSort.Sample.Controllers
                 new Employee(){ FirstName = "Samantha", LastName = "Millar", Age = 30, Gender = "F", YearsOfService = 3},
             };
 
-        public ActionResult Index(string column, string direction)
+        public ActionResult Index(string column, string direction, bool? filterIsEnabled)
         {
-            var model = _employees.OrderBy(column, direction.GetSortDirectionFromString());
+            IndexViewModel viewModel = new IndexViewModel();
 
-            return this.View(model);
+            bool filterEnabled = filterIsEnabled.HasValue && filterIsEnabled.Value;
+
+            viewModel.Employees = _employees.OrderBy(column, direction.GetSortDirectionFromString());
+            viewModel.FilterIsEnabled = filterEnabled;
+
+            return this.View(viewModel);
         }
-
     }
 }
