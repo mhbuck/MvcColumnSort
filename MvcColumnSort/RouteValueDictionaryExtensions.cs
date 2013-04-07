@@ -24,7 +24,15 @@ namespace MvcColumnSort
                 {
                     if (!routeValues.Keys.Contains(key))
                     {
-                        routeValues[key] = queryString[key];
+                        // To handle the check box issues with mvc. However I don't really like it as this would cause 
+                        // issues with things like check box lists.
+                        // http://stackoverflow.com/questions/1102232/how-to-access-the-checkbox-value-in-asp-net-mvc-without-using-method-parameter
+                        // http://forums.asp.net/t/1314753.aspx
+                        string[] queryStringValues = queryString.GetValues(key);
+                        if (queryStringValues != null)
+                        {
+                            routeValues[key] = queryStringValues.First();
+                        }
                     }
                 }
             }
